@@ -1,0 +1,15 @@
+<div class="example-wrapper">
+    <h1>Produits d'une catégorie</h1>
+
+    <form method="post" action="{{ path ('affiche_produits_une_categorie') }}" onchange="submit();">
+        <select name="lstCateg" class="form-control">
+            {% for categ in lesCategs %}
+                {% if laCateg is defined and categ.id == laCateg.id %}
+                    <option selected value = "{{ categ.id }}"> {{ categ.libelle }}</option>
+                {% else %}
+                    <option value = "{{ categ.id }}"> {{ categ.libelle }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </form>
+</div>

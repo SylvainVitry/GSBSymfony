@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des testeurs{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 1200px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Liste des testeurs</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Mail</th>
+                <th>DateCreation</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for testeur in testeurs %}
+            <tr>
+                <td>{{ testeur.nom }}</td>
+                <td>{{ testeur.prenom }}</td>
+                <td>{{ testeur.mail }}</td>
+                <td>{{ testeur.dateCreation ? testeur.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>                    
+                    <form method="post" action="{{ path('testeur_delete', {'id': testeur.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <a href = "{{ path('testeur_show', {'id': testeur.id}) }}"><i class="fas fa-info" title="Voir toutes les caractéristiques"></i> </a>
+                        <a href = "{{ path('testeur_edit', {'id': testeur.id}) }}"><i class="fas fa-edit" title="Modifier le testeur"></i></a>                       
+                        <input type="image" src="{{ asset('images/poubelle2.png') }}" alt="" >                        
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('testeur_new') }}" ><i class="fas fa-plus-circle"> Créer un nouveau testeur </i> </a>
+</div>
+{% endblock %}

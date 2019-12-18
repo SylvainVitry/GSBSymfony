@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pharmacie index{% endblock %}
+
+{% block body %}
+    <h1>Pharmacie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Numero</th>
+                <th>DateCreation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pharmacie in pharmacies %}
+            <tr>
+                <td>{{ pharmacie.id }}</td>
+                <td>{{ pharmacie.nom }}</td>
+                <td>{{ pharmacie.numero }}</td>
+                <td>{{ pharmacie.dateCreation ? pharmacie.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('pharmacie_show', {'id': pharmacie.id}) }}">show</a>
+                    <a href="{{ path('pharmacie_edit', {'id': pharmacie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pharmacie_new') }}">Create new</a>
+{% endblock %}

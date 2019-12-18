@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Testeur{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 1000px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+{% if testeur is defined == false %}
+    <h2>Problème de transmission de donnée</h2>
+    {% else %}
+        {% if testeur is null == true %}
+            <h2>Testeur inexistant</h2>
+        {% else %}
+            <h1>Caractéristiques du testeur numéro {{ testeur.id }}</h1>
+
+            <p>Nom : {{ testeur.nom }}</p>
+            <p>Prénom : {{ testeur.prenom }}</p>
+            <p>Mail : {{ testeur.mail }}</p>
+            <p>Date de création du testeur : {{ testeur.dateCreation ? testeur.dateCreation|date('Y-m-d H:i:s') : '' }}</p>
+            
+            <br>
+            <a href="{{ path('testeur_index') }}"><i class="fas fa-arrow-left"> Retour à la liste des testeurs</i></a><br><br>
+
+            <a href="{{ path('testeur_edit', {'id': testeur.id}) }}"><i class="fas fa-edit" title="Modifier le produit"> Modifier le testeur</i></a>
+            <br><br>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date Début</th>
+                        <th>Date Fin</th>
+                        <th>Nom Clinique</th>
+                        <th>Adresse de la Clinique</th>
+                        <th>Nom du Médecin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for testC in testeur.testsClinique %}
+                    <tr>
+                        <td> {{ testC.dateDebut | date('d/m/Y') }} </td>
+                        <td> {{ testC.dateFin | date('d/m/Y') }}</td>
+                        <td> {{ testC.nomClinique }} </td>
+                        <td> {{ testC.codePostalClinique }}  {{ testC.villeClinique }} </td>
+                        <td> {{ testC.nomMedecin }} </td>
+                        <td>
+                            <a href = "{{ path ('caracTestClinique', {'id': testC.id}) }}"><i class="fas fa-info" title="Voir les caractéristiques du test"></i> </a> 
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        {% endif %}
+{% endif %}
+  
+
+
+{% endblock %}
