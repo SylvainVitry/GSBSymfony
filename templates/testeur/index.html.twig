@@ -19,7 +19,8 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Mail</th>
-                <th>DateCreation</th>
+                <th>Maladie</th>
+                <th>DateCreation</th>               
                 <th></th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                 <td>{{ testeur.nom }}</td>
                 <td>{{ testeur.prenom }}</td>
                 <td>{{ testeur.mail }}</td>
+                <td>{{ testeur.maladie.libelle }}</td>
                 <td>{{ testeur.dateCreation ? testeur.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>                    
                     <form method="post" action="{{ path('testeur_delete', {'id': testeur.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">

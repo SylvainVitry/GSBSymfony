@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Maladie;
 use App\Entity\Testeur;
 use App\Entity\TestClinique;
 use Symfony\Component\Form\AbstractType;
@@ -17,6 +18,11 @@ class TesteurType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('mail')
+            ->add('maladie', EntityType::class,[
+                'label' => false,
+                'class' => Maladie::class,
+                'choice_label' => 'libelle' 
+            ])
             ->add('testsClinique', EntityType::class,[
                 'label' => false,
                 'class' => TestClinique::class,

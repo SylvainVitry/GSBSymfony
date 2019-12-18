@@ -21,6 +21,7 @@
             <p>Nom : {{ testeur.nom }}</p>
             <p>Prénom : {{ testeur.prenom }}</p>
             <p>Mail : {{ testeur.mail }}</p>
+            <p>Maladie : {{ testeur.maladie.libelle }}</p>
             <p>Date de création du testeur : {{ testeur.dateCreation ? testeur.dateCreation|date('Y-m-d H:i:s') : '' }}</p>
             
             <br>

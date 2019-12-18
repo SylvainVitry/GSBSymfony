@@ -43,6 +43,11 @@ class Testeur
      */
     private $testsClinique;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Maladie", inversedBy="testeurs")
+     */
+    private $maladie;
+
     public function __construct()
     {
         $this->testsClinique = new ArrayCollection();
@@ -123,6 +128,18 @@ class Testeur
         if ($this->testsClinique->contains($testClinique)) {
             $this->testsClinique->removeElement($testClinique);
         }
+
+        return $this;
+    }
+
+    public function getMaladie(): ?Maladie
+    {
+        return $this->maladie;
+    }
+
+    public function setMaladie(?Maladie $maladie): self
+    {
+        $this->maladie = $maladie;
 
         return $this;
     }
